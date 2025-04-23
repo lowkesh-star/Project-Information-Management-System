@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Project Information Management System</title>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/student-dashboard.css">
+</head>
+<body>
+    <header>
+        <div class="logo">RFP Information Management</div>
+        <nav>
+            <a href="../index.html" class="nav-btn">Logout</a>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <form id="studentGroupForm" onsubmit="handleStudentSubmit(event)">
+            <div class="student-group-form">
+                <div class="student-cards">
+                    <!-- Student 1 -->
+                    <div class="student-card">
+                        <h2>Student 1</h2>
+                        <input type="text" name="name1" placeholder="Name" class="form-input" required>
+                        <input type="text" name="id1" placeholder="ID" class="form-input" required>
+                        <div class="form-row">
+                            <select name="course1" class="form-input" required>
+                                <option value="">Course</option>
+                                <option value="CSE">CSE</option>
+                                <option value="CSD">CSD</option>
+                                <option value="CSM">CSM</option>
+                                <option value="CSBS">CSBS</option>
+                                <option value="AIML">AIML</option>
+                                <option value="AIDS">AIDS</option>
+                            </select>
+                            <select name="section1" class="form-input" required>
+                                <option value="">Section</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                                <option value="H">H</option>
+                                <option value="I">I</option>
+                                <option value="J">J</option>
+                            </select>
+                        </div>
+                        <input type="text" name="year1" placeholder="Year" class="form-input" required>
+                        <input type="email" name="email1" placeholder="Mail" class="form-input" required>
+                        <input type="tel" name="contact1" placeholder="Contact number" class="form-input" required>
+                    </div>
+
+                    <!-- Student 2 -->
+                    <div class="student-card">
+                        <h2>Student 2</h2>
+                        <input type="text" name="name2" placeholder="Name" class="form-input" required>
+                        <input type="text" name="id2" placeholder="ID" class="form-input" required>
+                        <div class="form-row">
+                            <select name="course2" class="form-input" required>
+                                <option value="">Course</option>
+                                <option value="CSE">CSE</option>
+                                <option value="CSD">CSD</option>
+                                <option value="CSM">CSM</option>
+                                <option value="CSBS">CSBS</option>
+                                <option value="AIML">AIML</option>
+                                <option value="AIDS">AIDS</option>
+                            </select>
+                            <select name="section2" class="form-input" required>
+                                <option value="">Section</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                                <option value="H">H</option>
+                                <option value="I">I</option>
+                                <option value="J">J</option>
+                            </select>
+                        </div>
+                        <input type="text" name="year2" placeholder="Year" class="form-input" required>
+                        <input type="email" name="email2" placeholder="Mail" class="form-input" required>
+                        <input type="tel" name="contact2" placeholder="Contact number" class="form-input" required>
+                    </div>
+
+                    <!-- Student 3 -->
+                    <div class="student-card">
+                        <h2>Student 3</h2>
+                        <input type="text" name="name3" placeholder="Name" class="form-input" required>
+                        <input type="text" name="id3" placeholder="ID" class="form-input" required>
+                        <div class="form-row">
+                            <select name="course3" class="form-input" required>
+                                <option value="">Course</option>
+                                <option value="CSE">CSE</option>
+                                <option value="CSD">CSD</option>
+                                <option value="CSM">CSM</option>
+                                <option value="CSBS">CSBS</option>
+                                <option value="AIML">AIML</option>
+                                <option value="AIDS">AIDS</option>
+                            </select>
+                            <select name="section3" class="form-input" required>
+                                <option value="">Section</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                                <option value="H">H</option>
+                                <option value="I">I</option>
+                                <option value="J">J</option>
+                            </select>
+                        </div>
+                        <input type="text" name="year3" placeholder="Year" class="form-input" required>
+                        <input type="email" name="email3" placeholder="Mail" class="form-input" required>
+                        <input type="tel" name="contact3" placeholder="Contact number" class="form-input" required>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+
+        <div class="project-form" style="display: none;">
+            <h2>Project Information</h2>
+            <form id="projectForm" onsubmit="handleProjectSubmit(event)">
+                <div class="form-group">
+                    <input type="number" 
+                           name="groupNumber" 
+                           placeholder="Group Number" 
+                           class="form-input" 
+                           min="1" 
+                           required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="projectTitle" placeholder="Project title" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="projectAbstract" placeholder="Project abstract" class="form-input" required></textarea>
+                </div>
+                <div class="form-group">
+                    <textarea name="requirements" placeholder="Requirements" class="form-input" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="languages">Programming Languages Used:</label>
+                    <select id="languages" name="languages" multiple class="form-input" required>
+                        <option value="Python">Python</option>
+                        <option value="Java">Java</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="Node">Node</option>
+                        <option value="Flask">Flask</option>
+                        <option value="C++">C++</option>
+                        <option value="C#">C#</option>
+                        <option value="PHP">PHP</option>
+                        <option value="Ruby">Ruby</option>
+                        <option value="Swift">Swift</option>
+                        <option value="Kotlin">Kotlin</option>
+                        <option value="Go">Go</option>
+                        <option value="Rust">Rust</option>
+                        <option value="TypeScript">TypeScript</option>
+                        <option value="R">R</option>
+                        <option value="MATLAB">MATLAB</option>
+                        <option value="Scala">Scala</option>
+                        <option value="Dart">Dart</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="SQL">SQL</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div id="selected-languages"></div>
+                </div>
+                <div class="form-group">
+                    <div class="file-upload">
+                        <div class="file-icon">📊</div>
+                        <p>Presentation (PPT, PPTX, or PDF)</p>
+                        <input type="file" 
+                               id="presentation" 
+                               name="presentation" 
+                               accept=".ppt,.pptx,.pdf" 
+                               style="display: block; margin: 10px auto;"
+                               required>
+                        <div class="selected-file-name"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="file-upload">
+                        <div class="file-icon">📄</div>
+                        <p>Documentation (DOC, DOCX, or PDF)</p>
+                        <input type="file" 
+                               id="documentation" 
+                               name="documentation" 
+                               accept=".doc,.docx,.pdf" 
+                               style="display: block; margin: 10px auto;"
+                               required>
+                        <div class="selected-file-name"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="file-upload">
+                        <div class="file-icon">📁</div>
+                        <p>Project Files</p>
+                        <input type="file" 
+                               id="projectFolder" 
+                               name="projectFolder" 
+                               multiple 
+                               style="display: block; margin: 10px auto;">
+                        <div class="selected-file-name"></div>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Submit Project</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="../scripts/student.js"></script>
+</body>
+</html>

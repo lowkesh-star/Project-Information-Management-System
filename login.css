@@ -1,0 +1,139 @@
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    padding: 2rem;
+}
+
+.login-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    overflow: hidden;
+}
+
+.login-illustration {
+    flex: 1;
+    background-color: #f8f8f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+}
+
+.login-image {
+    max-width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.login-form-container {
+    flex: 1;
+    padding: 2rem;
+}
+
+.login-form-wrapper {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.login-type-toggle {
+    display: flex;
+    background-color: #f5f5f5;
+    border-radius: 30px;
+    padding: 4px;
+    margin-bottom: 2rem;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    color: #666;
+}
+
+.toggle-btn.active {
+    background-color: #9CB5A3;
+    color: white;
+}
+
+.login-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #666;
+    font-weight: normal;
+}
+
+.login-input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.login-input:focus {
+    outline: none;
+    border-color: #9CB5A3;
+    box-shadow: 0 0 0 2px rgba(156, 181, 163, 0.2);
+}
+
+.next-button {
+    width: 100%;
+    background-color: #9CB5A3;
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.next-button:hover {
+    background-color: #7B9A86;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-card {
+        flex-direction: column;
+        margin: 1rem;
+    }
+
+    .login-illustration {
+        padding: 1.5rem;
+    }
+
+    .login-image {
+        max-width: 60%;
+    }
+
+    .login-form-container {
+        padding: 1.5rem;
+    }
+}
+
+/* Placeholder styling */
+.login-input::placeholder {
+    color: #999;
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Project Information Management System</title>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/login.css">
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-card">
+            <div class="login-illustration">
+                <img src="../bottom.png" alt="Sign Up Illustration" class="login-image" id="loginImage">
+            </div>
+            <div class="login-form-container">
+                <div class="login-form-wrapper">
+                    <div class="login-type-toggle">
+                        <button class="toggle-btn active" data-type="student" data-image="../bottom.png">Student</button>
+                        <button class="toggle-btn" data-type="lecturer" data-image="../lect.jpg">Lecturer</button>
+                    </div>
+
+                    <div id="signupForm">
+                        <h1 class="login-title">Sign Up <span class="subtitle" id="signupType">as a student</span></h1>
+                        <form onsubmit="handleSignup(event)">
+                            <div class="form-group">
+                                <input type="text" id="fullName" placeholder="Full Name" class="login-input" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="signupId" placeholder="ID" class="login-input" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" placeholder="Email" class="login-input" required>
+                                <div class="email-status" id="emailStatus"></div>
+                            </div>
+                            <div class="form-group verification-section" style="display: none;" id="verificationSection">
+                                <input type="text" id="verificationCode" placeholder="Enter verification code" class="login-input" maxlength="6">
+                                <div class="verification-timer" id="timer"></div>
+                                <button type="button" class="resend-btn" id="resendBtn" disabled>Resend Code</button>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password" placeholder="Password" class="login-input" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="confirmPassword" placeholder="Confirm Password" class="login-input" required>
+                            </div>
+                            <button type="submit" class="next-button" id="signupBtn">Sign Up</button>
+                        </form>
+                        <p class="switch-form">
+                            Already have an account? <a href="login.html">Login</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUserType = 'student';
+        const toggleBtns = document.querySelectorAll('.toggle-btn');
+        const loginImage = document.getElementById('loginImage');
+        const signupType = document.getElementById('signupType');
+        let verificationTimer;
+        let isEmailVerified = false;
+
+        // Toggle between student and lecturer
+        toggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                toggleBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentUserType = btn.dataset.type;
+                signupType.textContent = `as a ${currentUserType}`;
+                
+                loginImage.style.opacity = '0';
+                setTimeout(() => {
+                    loginImage.src = btn.dataset.image;
+                    loginImage.style.opacity = '1';
+                }, 300);
+            });
+        });
+
+        // Email validation and verification
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = this.value;
+            const emailStatus = document.getElementById('emailStatus');
+            
+            if (validateEmail(email)) {
+                emailStatus.textContent = 'Sending verification code...';
+                emailStatus.style.color = '#666';
+                
+                // Simulate sending verification code
+                setTimeout(() => {
+                    document.getElementById('verificationSection').style.display = 'block';
+                    emailStatus.textContent = 'Verification code sent!';
+                    emailStatus.style.color = 'green';
+                    startVerificationTimer();
+                }, 1000);
+            } else {
+                emailStatus.textContent = 'Please enter a valid email';
+                emailStatus.style.color = 'red';
+            }
+        });
+
+        // Verification code validation
+        document.getElementById('verificationCode').addEventListener('input', function() {
+            if (this.value.length === 6) {
+                // Simulate code verification
+                setTimeout(() => {
+                    isEmailVerified = true;
+                    document.getElementById('emailStatus').textContent = 'Email verified!';
+                    document.getElementById('emailStatus').style.color = 'green';
+                    this.disabled = true;
+                    clearInterval(verificationTimer);
+                    document.getElementById('timer').style.display = 'none';
+                    document.getElementById('resendBtn').style.display = 'none';
+                }, 500);
+            }
+        });
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function startVerificationTimer() {
+            let timeLeft = 300; // 5 minutes
+            const timerDisplay = document.getElementById('timer');
+            const resendBtn = document.getElementById('resendBtn');
+
+            clearInterval(verificationTimer);
+            verificationTimer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(verificationTimer);
+                    resendBtn.disabled = false;
+                    timerDisplay.textContent = 'Code expired';
+                }
+                timeLeft--;
+            }, 1000);
+        }
+
+        // Handle form submission
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!isEmailVerified) {
+                alert('Please verify your email first!');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Simulate successful signup
+            alert('Account created successfully! Please login.');
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <style>
+    .email-status {
+        font-size: 0.8rem;
+        margin-top: 4px;
+    }
+
+    .verification-section {
+        margin-top: 10px;
+    }
+
+    .verification-timer {
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 4px;
+    }
+
+    .resend-btn {
+        background: none;
+        border: none;
+        color: var(--primary-green);
+        font-size: 0.8rem;
+        cursor: pointer;
+        padding: 0;
+        margin-top: 4px;
+    }
+
+    .resend-btn:disabled {
+        color: #999;
+        cursor: not-allowed;
+    }
+    </style>
+</body>
+</html>
+
+
+
+
+
+
+
+

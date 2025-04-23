@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard - Project Information Management System</title>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/faculty-dashboard.css">
+</head>
+<body>
+    <header>
+        <div class="logo">RFP Information Management</div>
+        <nav>
+            <a href="../index.html" class="nav-btn">Logout</a>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Faculty Dashboard</h1>
+            <p class="subtitle">Manage and review student projects</p>
+        </div>
+
+        <div class="filters-section">
+            <div class="search-group">
+                <div class="search-box">
+                    
+                    <img src="search icon.jpg" class="search-icon" alt="search" 
+                         style="width: 16px; height: 16px; opacity: 0.6;">
+                    <input type="text" id="groupSearch" placeholder="Search by Group Number" class="search-input">
+                </div>
+                <div class="search-box">
+                    <img src="graduation.png" class="search-icon" alt="search" 
+                         style="width: 16px; height: 16px; opacity: 0.6;">
+                    <select id="courseSearch" class="search-input">
+                        <option value="">All Courses</option>
+                        <option value="CSE">CSE</option>
+                        <option value="CSD">CSD</option>
+                        <option value="CSM">CSM</option>
+                        <option value="CSBS">CSBS</option>
+                        <option value="AIML">AIML</option>
+                        <option value="AIDS">AIDS</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <span class="search-icon">📝</span>
+                    <input type="text" id="sectionSearch" placeholder="Search by Section" class="search-input">
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <select id="languageFilter" class="filter-select">
+                    <option value="">Programming Language</option>
+                    <option value="Python">Python</option>
+                    <option value="Java">Java</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Node">Node</option>
+                    <option value="Flask">Flask</option>
+                    <option value="C++">C++</option>
+                    <option value="C#">C#</option>
+                    <option value="PHP">PHP</option>
+                    <option value="Ruby">Ruby</option>
+                    <option value="Swift">Swift</option>
+                    <option value="Kotlin">Kotlin</option>
+                    <option value="Go">Go</option>
+                    <option value="Rust">Rust</option>
+                    <option value="TypeScript">TypeScript</option>
+                    <option value="R">R</option>
+                    <option value="MATLAB">MATLAB</option>
+                    <option value="Scala">Scala</option>
+                    <option value="Dart">Dart</option>
+                    <option value="HTML">HTML</option>
+                    <option value="CSS">CSS</option>
+                    <option value="SQL">SQL</option>
+                </select>
+
+                <select id="sortFilter" class="filter-select">
+                    <option value="recent">Most Recent</option>
+                    <option value="group">Group Number</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-card">
+                <h3>Total Projects</h3>
+                <p id="totalProjects" class="stat-number">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Groups</h3>
+                <p id="totalGroups" class="stat-number">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Latest Submission</h3>
+                <p id="latestSubmission" class="stat-number">-</p>
+            </div>
+        </div>
+
+        <div id="projectsList" class="projects-grid">
+            <!-- Projects will be populated by JavaScript -->
+        </div>
+    </main>
+
+    <template id="projectCardTemplate">
+        <div class="project-card">
+            <div class="project-header">
+                <div class="header-main">
+                    <h3 class="project-title"></h3>
+                    <span class="group-number"></span>
+                </div>
+                <div class="project-meta">
+                    <span class="course-tag"></span>
+                    <span class="section-tag"></span>
+                    <span class="year-tag"></span>
+                </div>
+            </div>
+
+            <div class="project-details">
+                <div class="languages-section">
+                    <h4>Programming Languages:</h4>
+                    <div class="languages-list"></div>
+                </div>
+                
+                <div class="project-files">
+                    <div class="file-buttons">
+                        <button class="file-btn presentation-btn">
+                            <span class="icon">📊</span>
+                            <span class="text">Presentation</span>
+                        </button>
+                        <button class="file-btn documentation-btn">
+                            <span class="icon">📄</span>
+                            <span class="text">Documentation</span>
+                        </button>
+                        <button class="file-btn project-files-btn">
+                            <span class="icon">📁</span>
+                            <span class="text">Project Files</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="toggle-details-btn">
+                    <span class="icon">👥</span>
+                    View Team Details
+                </button>
+
+                <div class="expanded-details" style="display: none;">
+                    <div class="abstract-section">
+                        <h4>Project Abstract:</h4>
+                        <p class="project-abstract"></p>
+                    </div>
+
+                    <div class="student-info">
+                        <h4>Group Members:</h4>
+                        <div class="students-grid">
+                            <div class="student-details" id="student1">
+                                <h5>Student 1</h5>
+                                <p class="student-name"></p>
+                                <p class="student-id"></p>
+                                <p class="student-course"></p>
+                                <p class="student-section"></p>
+                                <p class="student-year"></p>
+                                <p class="student-email"></p>
+                                <p class="student-contact"></p>
+                            </div>
+                            <div class="student-details" id="student2">
+                                <h5>Student 2</h5>
+                                <p class="student-name"></p>
+                                <p class="student-id"></p>
+                                <p class="student-course"></p>
+                                <p class="student-section"></p>
+                                <p class="student-year"></p>
+                                <p class="student-email"></p>
+                                <p class="student-contact"></p>
+                            </div>
+                            <div class="student-details" id="student3">
+                                <h5>Student 3</h5>
+                                <p class="student-name"></p>
+                                <p class="student-id"></p>
+                                <p class="student-course"></p>
+                                <p class="student-section"></p>
+                                <p class="student-year"></p>
+                                <p class="student-email"></p>
+                                <p class="student-contact"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-actions">
+                <button class="share-btn">
+                    <span class="icon">📤</span>
+                    Share Project
+                </button>
+                <span class="submission-date"></span>
+            </div>
+        </div>
+    </template>
+
+    <script src="../scripts/faculty.js"></script>
+</body>
+</html>
